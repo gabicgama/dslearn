@@ -16,6 +16,7 @@ public class AuthService {
 	@Autowired
 	private UserRepository userRepository;
 
+	// Busca o contexto do usuário logado
 	@Transactional(readOnly = true)
 	public User authenticated() {
 		try {
@@ -26,6 +27,7 @@ public class AuthService {
 		}
 	}
 	
+	// Verifica de se o id de um recurso de usuário é o mesmo do usuário logado
 	public void validateSelfOrAdmin(Long userId) {
 		User user = authenticated();
 		if (!user.getId().equals(userId) && !user.hasRole("ROLE_ADMIN")) {
